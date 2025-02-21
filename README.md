@@ -18,7 +18,7 @@ proceso hijo para cada cliente.
 - Gestiona la pérdida de paquetes, utilizando para ello un temporizador y, si es nececario,
 volviendo a retransmitir el paquete perdido.
 ### Configuración
-En las primeras lineas de código de debe indicar el puerto por el que estará disponible y la ruta de la carpeta donde se alojarán los ficheros para descargar.
+En las primeras lineas de código se debe indicar el puerto por el que estará disponible y la ruta de la carpeta donde se alojarán los ficheros para descargar.
 ```python
 PORT = 69
 BLOCK_SIZE = 512
