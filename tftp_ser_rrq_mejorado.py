@@ -20,6 +20,7 @@ TIMEOUT = 0.5
 MAX_RETRANSMISIONS = 3
 retr = 0
 
+
 def send_error(s, addr, code, message):
     resp  = ERROR
     resp += code.to_bytes(2, 'big')
@@ -34,6 +35,7 @@ def send_file(s, addr, filename):
         send_error(s, addr, 1, 'File not found.')
         exit(1)
 
+
     s.connect(addr)
     data = f.read(BLOCK_SIZE)
     resp  = DATA
@@ -44,6 +46,7 @@ def send_file(s, addr, filename):
     block_num = 1
     last = False if len(data) == BLOCK_SIZE else True
     while True:
+        
         sl, _, _ = select.select([s], [], [], TIMEOUT )
         if (not sl):
             if (retr<MAX_RETRANSMISIONS):
@@ -68,7 +71,7 @@ def send_file(s, addr, filename):
                 continue
             if last:
                 break
-           if (block_num == ((1<<16)-1)):
+            if (block_num == ((1<<16)-1)):
                 block_num = 0
             else:
                 block_num += 1
@@ -84,7 +87,7 @@ def send_file(s, addr, filename):
     f.close()
 
 if __name__ == '__main__':
-   s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind(('', PORT))
     signal.signal(signal.SIGCHLD, signal.SIG_IGN)
 
@@ -100,7 +103,7 @@ if __name__ == '__main__':
                  send_error(s, cli_addr, 0, 'Mode unkown or not implemented')
                  continue
         filename = os.path.basename(filename.decode()) # For security, filter possible paths.
-       if os.fork():
+        if os.fork():
             pass
         else:
             s.close()
