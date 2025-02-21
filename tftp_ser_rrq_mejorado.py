@@ -13,7 +13,7 @@ DATA  = b'\x00\x03'
 ACK   = b'\x00\x04'
 ERROR = b'\x00\x05'
 
-PORT = 50069
+PORT = 69
 BLOCK_SIZE = 512
 FILES_PATH ='./data/'
 TIMEOUT = 0.5
